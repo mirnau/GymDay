@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34004.107
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymDay", "GymDay\GymDay.csproj", "{50349382-FDA5-4479-819B-30B6DA2C2416}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymDay.Tests", "GymDay.Tests\GymDay.Tests\GymDay.Tests.csproj", "{5D766C9C-8749-47D2-AC42-6A949041A6CC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{50349382-FDA5-4479-819B-30B6DA2C2416}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50349382-FDA5-4479-819B-30B6DA2C2416}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50349382-FDA5-4479-819B-30B6DA2C2416}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{50349382-FDA5-4479-819B-30B6DA2C2416}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50349382-FDA5-4479-819B-30B6DA2C2416}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50349382-FDA5-4479-819B-30B6DA2C2416}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{5D766C9C-8749-47D2-AC42-6A949041A6CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D766C9C-8749-47D2-AC42-6A949041A6CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D766C9C-8749-47D2-AC42-6A949041A6CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D766C9C-8749-47D2-AC42-6A949041A6CC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1E044BB0-863D-43BE-B58B-288E1F07B0E8}
+	EndGlobalSection
+EndGlobal
