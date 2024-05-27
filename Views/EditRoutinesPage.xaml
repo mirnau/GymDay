@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewModels="clr-namespace:GymDay.ViewModels"
+             xmlns:models="clr-namespace:GymDay.Models"
+             x:Class="GymDay.Views.EditRoutinesPage"
+             x:DataType="viewModels:EditRoutinesViewModel"
+             Title="EditRoutinesPage">
+
+    <Shell.TitleView>
+
+        <Button
+            BorderColor="White"
+            BorderWidth="2"
+            CornerRadius="50"
+            Text="+"
+            HorizontalOptions="End"
+            Margin="5"
+            VerticalOptions="Center"
+            Command="{Binding AddRoutineCommand}"/>
+
+    </Shell.TitleView>
+
+    <CollectionView
+        BackgroundColor="Bisque"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="StartAndExpand"
+        ItemsSource="{Binding Routines}"
+        CanReorderItems="True">
+
+        <CollectionView.Behaviors>
+
+            <xct:EventToCommandBehavior
+                x:DataType="viewModels:EditRoutinesViewModel"
+                EventName="ReorderCompleted"
+                Command="{Binding ReorderCommand}"
+                />
+
+        </CollectionView.Behaviors>
+
+        <CollectionView.EmptyView>
+
+            <Label
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Text="Add a new Routine" />
+
+        </CollectionView.EmptyView>
+
+        <CollectionView.ItemsLayout>
+
+            <LinearItemsLayout 
+                Orientation="Vertical" 
+                ItemSpacing="0"/>
+
+        </CollectionView.ItemsLayout>
+
+        <CollectionView.ItemTemplate>
+
+            <DataTemplate
+                x:DataType="models:Routine"
+                >
+
+                <SwipeView>
+
+                    <SwipeView.LeftItems>
+
+                        <SwipeItems>
+                            <SwipeItem 
+                                Text="Delete"
+                                BackgroundColor="Coral"
+                            />
+                        </SwipeItems>
+
+                    </SwipeView.LeftItems>
+
+                    <Frame 
+                        x:DataType="models:Routine"
+                        HasShadow="True"
+                        BorderColor="DarkGray"
+                        Margin="5,2.5,5,2.5"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        Padding="10"
+                        >
+                        <StackLayout>
+                            <CollectionView
+                            x:DataType="models:Routine"
+                            BackgroundColor="Bisque"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="StartAndExpand"
+                            ItemsSource="{Binding Workouts}"
+                            CanReorderItems="True">
+
+                                <CollectionView.Behaviors>
+
+                                    <xct:EventToCommandBehavior
+                                     x:DataType="viewModels:EditRoutinesViewModel"
+                                     EventName="ReorderCompleted"
+                                     />
+
+                                </CollectionView.Behaviors>
+
+                                <CollectionView.EmptyView>
+
+                                    <Label
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    Text="Add a new Routine" />
+
+                                </CollectionView.EmptyView>
+
+                                <CollectionView.ItemsLayout>
+
+                                    <LinearItemsLayout 
+                                   Orientation="Vertical" 
+                                   ItemSpacing="0"/>
+
+                                </CollectionView.ItemsLayout>
+
+                                <CollectionView.ItemTemplate>
+
+                                    <DataTemplate
+                                    x:DataType="models:Workout"
+                                    >
+
+                                        <SwipeView>
+
+                                            <SwipeView.LeftItems>
+
+                                                <SwipeItems>
+
+                                                    <SwipeItem 
+                                                    Text="Select"
+                                                    BackgroundColor="LightGreen"
+                                                    />
+
+                                                    <SwipeItem 
+                                                    Text="Edit"
+                                                    BackgroundColor="Coral"
+                                                    />
+
+                                                </SwipeItems>
+
+                                            </SwipeView.LeftItems>
+
+                                            <Frame 
+                                            x:DataType="models:Routine"
+                                            HasShadow="True"
+                                            BorderColor="DarkGray"
+                                            Margin="5,2.5,5,2.5"
+                                            VerticalOptions="FillAndExpand"
+                                            HorizontalOptions="FillAndExpand"
+                                            Padding="10"
+                                            >
+
+                                                <Grid
+                                                x:DataType="models:Workout"
+                                                BackgroundColor="LightGreen">
+
+                                                    <Grid.RowDefinitions>
+
+                                                        <RowDefinition Height="*"/>
+
+                                                        <RowDefinition Height="auto"/>
+
+                                                    </Grid.RowDefinitions>
+
+                                                    <Grid.ColumnDefinitions>
+
+                                                        <ColumnDefinition Width="*" />
+
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Entry
+                                                    Grid.Row="0"
+                                                    FontAttributes="Bold"
+                                                    FontSize="Header"
+                                                    Text="{Binding Name}"
+                                                    VerticalOptions="CenterAndExpand"
+                                                    HorizontalOptions="CenterAndExpand"/>
+
+                                                    <Entry
+                                                    Grid.Row="1"
+                                                    FontSize="Small"
+                                                    Text="{Binding Description}"
+                                                    VerticalOptions="CenterAndExpand"
+                                                    HorizontalOptions="CenterAndExpand"/>
+
+                                                </Grid>
+
+                                            </Frame>
+
+                                        </SwipeView>
+
+                                    </DataTemplate>
+
+                                </CollectionView.ItemTemplate>
+
+                            </CollectionView>
+                            <Button
+                                Text="Add Workout"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:EditRoutinesViewModel}}, Path=AddWorkoutCommand}"
+                                CommandParameter="{Binding .}"/>
+                        </StackLayout>
+                    </Frame>
+
+                </SwipeView>
+
+            </DataTemplate>
+
+        </CollectionView.ItemTemplate>
+
+    </CollectionView>
+</ContentPage>

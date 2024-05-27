@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewModels="clr-namespace:GymDay.ViewModels"
+             xmlns:Models="clr-namespace:GymDay.Models"
+             x:Class="GymDay.Views.WorkoutPlansPage"
+             x:DataType="viewModels:WorkoutPlansViewModel"
+             Title="{Binding Title}">
+
+    <Shell.TitleView>
+
+        <Button
+            BorderColor="White"
+            BorderWidth="2"
+            CornerRadius="50"
+            Text="+"
+            HorizontalOptions="End"
+            Margin="5"
+            VerticalOptions="Center"
+            Command="{Binding AddWorkoutProgramCommand}"/>
+
+    </Shell.TitleView>
+
+    <CollectionView
+        BackgroundColor="Bisque"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="StartAndExpand"
+        ItemsSource="{Binding Programs}"
+        CanReorderItems="True">
+
+        <CollectionView.Behaviors>
+
+            <xct:EventToCommandBehavior
+                x:DataType="viewModels:WorkoutPlansViewModel"
+                EventName="ReorderCompleted"
+                Command="{Binding ReorderCommand}"/>
+
+        </CollectionView.Behaviors>
+
+        <CollectionView.EmptyView>
+
+            <Label
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Text="{Binding Source={RelativeSource AncestorType={x:Type viewModels:WorkoutPlansViewModel}}, Path=EmptyCollectionMessage}" />
+
+        </CollectionView.EmptyView>
+
+        <CollectionView.ItemsLayout>
+
+            <LinearItemsLayout 
+                Orientation="Vertical" 
+                ItemSpacing="0"/>
+
+        </CollectionView.ItemsLayout>
+
+        <CollectionView.ItemTemplate>
+
+            <DataTemplate
+                x:DataType="Models:WorkoutPlan">
+
+                <SwipeView>
+
+                    <SwipeView.LeftItems>
+
+                        <SwipeItems>
+
+                            <SwipeItem 
+                            Text="Delete"
+                            BackgroundColor="Coral"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:WorkoutPlansViewModel}}, Path=ShowDeleteWarningCommand}"
+                            CommandParameter="{Binding .}" 
+                            />
+
+                        </SwipeItems>
+
+                    </SwipeView.LeftItems>
+
+                    <Frame 
+                        x:DataType="Models:WorkoutPlan"
+                        HasShadow="True"
+                        BorderColor="DarkGray"
+                        Margin="5,2.5,5,2.5"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        Padding="10">
+
+                        <Frame.GestureRecognizers>
+                            
+                            <TapGestureRecognizer
+                                NumberOfTapsRequired="2"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:WorkoutPlansViewModel}}, Path=NavigateToRoutinesCommand}"
+                                CommandParameter="{Binding .}"/>
+                            
+                        </Frame.GestureRecognizers>
+
+                        <Grid
+                            BackgroundColor="LightGreen">
+
+                            <Grid.RowDefinitions>
+
+                                <RowDefinition Height="*"/>
+
+                                <RowDefinition Height="auto"/>
+
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+
+                                <ColumnDefinition Width="*" />
+
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                Grid.Row="0"
+                                FontAttributes="Bold"
+                                FontSize="Header"
+                                Text="{Binding Name}"
+                                VerticalOptions="CenterAndExpand"
+                                HorizontalOptions="CenterAndExpand"/>
+
+                            <Label
+                                Grid.Row="1"
+                                FontSize="Default"
+                                Text="{Binding Description}"
+                                VerticalOptions="CenterAndExpand"
+                                HorizontalOptions="CenterAndExpand"/>
+
+                        </Grid>
+
+                    </Frame>
+
+                </SwipeView>
+
+            </DataTemplate>
+
+        </CollectionView.ItemTemplate>
+
+    </CollectionView>
+</ContentPage>

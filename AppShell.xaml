@@ -3,12 +3,22 @@
     x:Class="GymDay.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:GymDay"
-    Shell.FlyoutBehavior="Disabled">
+    xmlns:views="clr-namespace:GymDay.Views"
+    Shell.FlyoutBehavior="Flyout">
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Title="Welcome"
+        ContentTemplate="{DataTemplate views:WelcomePage}"
+        Route="WelcomePage" />
+    
+    <ShellContent
+        Title="Your Programs"
+        ContentTemplate="{DataTemplate views:WorkoutPlansPage}"
+        Route="WorkoutPlansPage" />
+
+    <ShellContent
+        Title="Current Workout"
+        ContentTemplate="{DataTemplate views:CurrentWorkoutPage}"
+        Route="CurrentWorkoutPage" />
 
 </Shell>
