@@ -5,7 +5,7 @@ namespace GymDay.Models;
 public class Workout : BaseWorkoutComponent
 {
     [ForeignKey(typeof(Routine))]
-    public int RoutineId { get; set; }
+    public int ParentId { get; set; }
 
     //Relationships
     [OneToMany(CascadeOperations = CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]

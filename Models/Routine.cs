@@ -3,10 +3,10 @@ using System.Collections.ObjectModel;
 
 namespace GymDay.Models;
 
-public class Routine : BaseWorkoutComponent
+public class Routine : BaseWorkoutComponent, IModelWithParentId
 {
     [ForeignKey(typeof(WorkoutPlan))]
-    public int WorkoutPlanId { get; set; }
+    public int ParentId { get; set; }
 
     //Relationships
     [ManyToOne(CascadeOperations = CascadeOperation.All)]

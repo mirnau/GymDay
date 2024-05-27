@@ -7,7 +7,7 @@ public class BaseWorkoutComponent
     public int Id { get; set; }
     public int Rank { get; set; }
     public string Name { get; set; }
-    public string Description { get; set; } 
+    public string Description { get; set; }
     public DateTime TimeCreated { get; set; }
     public DateTime LastView { get; set; }
     public bool IsSkipped { get; set; }

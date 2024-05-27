@@ -51,14 +51,20 @@ namespace GymDay.ViewModels
         [RelayCommand]
         private async Task NavigateToRoutines(WorkoutPlan workoutProgram)
         {
-            await Shell.Current.GoToAsync($"{nameof(EditRoutinesPage)}?currentId={workoutProgram.Id}");
+            await Shell.Current.GoToAsync($"{nameof(EditRoutinesPage)}?rank={workoutProgram.Id}");
         }
 
         [RelayCommand]
         public async Task AddWorkoutProgram()
         {
+            string name = await ShowPopupDialogSetName();
+
+            if (name == null || name == string.Empty)
+                return;
+
             WorkoutPlan workoutProgram = new()
             {
+                Name = name,
                 TimeCreated = DateTime.Now,
             };
 
@@ -74,7 +80,7 @@ namespace GymDay.ViewModels
         {
             DeleteDialoguePage popup = new()
             {
-                CanBeDismissedByTappingOutsideOfPopup = false
+                CanBeDismissedByTappingOutsideOfPopup = true
             };
 
             bool deleteIsPermitted = (bool)(await Application.Current.MainPage.ShowPopupAsync(popup));
@@ -84,6 +90,31 @@ namespace GymDay.ViewModels
                 await dbService.DeleteAsync(workoutProgram);
                 Programs.Remove(workoutProgram);
             }
+        }
+
+        [RelayCommand]
+        public async Task Edit(WorkoutPlan plan)
+        {
+            string name = await ShowPopupDialogSetName();
+
+            if (name == null || name == string.Empty)
+                return;
+
+            plan.Name = name;
+
+            Programs = new(Programs);
+
+            await dbService.UpdateAsync(plan);
+        }
+
+        public async Task<string> ShowPopupDialogSetName()
+        {
+            ReturnNameDialoguePage popup = new()
+            {
+                CanBeDismissedByTappingOutsideOfPopup = false
+            };
+
+            return (string)(await Application.Current.MainPage.ShowPopupAsync(popup));
         }
     }
 }

@@ -5,7 +5,7 @@ namespace GymDay.Models;
 public class Exercise : BaseWorkoutComponent
 {
     [ForeignKey(typeof(Workout))]
-    public int WorkoutId { get; set; }
+    public int ParentId { get; set; }
     public int PreviousWeekKgs { get; set; }
     public int EstimatedReps { get; set; }
     public int OneRepMax { get; set; }

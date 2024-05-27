@@ -138,15 +138,27 @@ public class SqLiteService : IDatabaseService
         }
     }
 
-    public async Task<List<T>> GetAllAsync<T>(int CurrentId) where T : BaseWorkoutComponent, new()
+    public async Task<List<T>> GetAllAsync<T>(int rank) where T : BaseWorkoutComponent, new()
     {
         await Init();
-        return await db.Table<T>().Where(item => item.Id == CurrentId).ToListAsync();
+        return await db.Table<T>().Where(item => item.Id == rank).ToListAsync();
     }
 
-    public async Task<T> GetAsync<T>(int currentId) where T : BaseWorkoutComponent, new()
+    public async Task<T> GetAsync<T>(int rank) where T : BaseWorkoutComponent, new()
     {
         await Init();
-        return await db.Table<T>().Where(item => item.Id == currentId).FirstOrDefaultAsync();
+        return await db.Table<T>().Where(item => item.Id == rank).FirstOrDefaultAsync();
+    }
+
+    public async Task<List<T>> GetAllByParentId<T>(int CurrentId) where T : BaseWorkoutComponent, IModelWithParentId, new()
+    {
+        await Init();
+        return await db.Table<T>().Where(item => item.ParentId == CurrentId).ToListAsync();
+    }
+
+    public async Task<T> GetByParentIdAsync<T>(int currentId) where T : BaseWorkoutComponent, IModelWithParentId, new()
+    {
+        await Init();
+        return await db.Table<T>().Where(item => item.ParentId == currentId).FirstOrDefaultAsync();
     }
 }

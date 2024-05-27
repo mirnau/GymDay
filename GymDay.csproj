@@ -57,7 +57,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Models\" />
+	  <Compile Update="Views\Popups\ReturnNameDialoge.xaml.cs">
+	    <DependentUpon>ReturnNameDialoge.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\Popups\ReturnNameDialoge.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

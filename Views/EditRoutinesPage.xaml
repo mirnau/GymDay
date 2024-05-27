@@ -26,7 +26,7 @@
         BackgroundColor="Bisque"
         HorizontalOptions="FillAndExpand"
         VerticalOptions="StartAndExpand"
-        ItemsSource="{Binding Routines}"
+        ItemsSource="{Binding ObservableRoutines}"
         CanReorderItems="True">
 
         <CollectionView.Behaviors>

@@ -18,7 +18,10 @@
             HorizontalOptions="End"
             Margin="5"
             VerticalOptions="Center"
-            Command="{Binding AddWorkoutProgramCommand}"/>
+            Command="{Binding AddWorkoutProgramCommand}">
+            
+        </Button>
+
 
     </Shell.TitleView>
 
@@ -72,6 +75,13 @@
                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:WorkoutPlansViewModel}}, Path=ShowDeleteWarningCommand}"
                             CommandParameter="{Binding .}" 
                             />
+                            
+                            <SwipeItem 
+                            Text="Edit"
+                            BackgroundColor="LightYellow"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:WorkoutPlansViewModel}}, Path=EditCommand}"
+                            CommandParameter="{Binding .}" 
+                            />
 
                         </SwipeItems>
 
@@ -117,6 +127,8 @@
                                 FontAttributes="Bold"
                                 FontSize="Header"
                                 Text="{Binding Name}"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center"
                                 VerticalOptions="CenterAndExpand"
                                 HorizontalOptions="CenterAndExpand"/>
 

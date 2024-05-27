@@ -4,68 +4,69 @@ using GymDay.Models;
 using GymDay.Services;
 using System.Collections.ObjectModel;
 
-namespace GymDay.ViewModels
+namespace GymDay.ViewModels;
+
+[QueryProperty(nameof(Rank), "rank")]
+public partial class EditRoutinesViewModel : BaseViewModel
 {
-    [QueryProperty(nameof(CurrentId), "currentId")]
-    public partial class EditRoutinesViewModel : BaseViewModel
+    [ObservableProperty]
+    private WorkoutPlan workoutProgram;
+
+    [ObservableProperty]
+    private ObservableCollection<Routine> observableRoutines;
+
+    private int rank;
+    private readonly IDatabaseService dbService;
+
+    public EditRoutinesViewModel(IDatabaseService dbService)
     {
-        [ObservableProperty]
-        private WorkoutPlan workoutProgram;
+        this.dbService = dbService;
+        ObservableRoutines = [];
+    }
 
-        [ObservableProperty]
-        private ObservableCollection<Routine> routines;
+    private async Task InitAsync()
+    {
+        WorkoutProgram = await dbService.GetAsync<WorkoutPlan>(Rank);
+        WorkoutProgram.LastView = DateTime.Now;
 
-        private int currentId;
-        private readonly IDatabaseService dbService;
+        List<Routine> routinesList = await dbService.GetAllByParentId<Routine>(WorkoutProgram.Id);
+        ObservableRoutines = new ObservableCollection<Routine>(routinesList);
 
-        public EditRoutinesViewModel(IDatabaseService dbService)
+        if (ObservableRoutines.Any())
         {
-            this.dbService = dbService;
-            Routines = new ObservableCollection<Routine>();
+            _ = ObservableRoutines.OrderBy(item => item.Rank);
         }
+    }
 
-        private async Task InitAsync()
+    [RelayCommand]
+    private async Task AddRoutineAsync()
+    {
+        Routine routine = new()
         {
-            WorkoutProgram = await dbService.GetAsync<WorkoutPlan>(CurrentId);
-            WorkoutProgram.LastView = DateTime.Now;
+            TimeCreated = DateTime.Now,
+            LastView = DateTime.Now,
+            ParentId = Rank,
+            Rank = ObservableRoutines.Count + 1
+        };
 
-            List<Routine> routinesList = await dbService.GetAllAsync<Routine>(CurrentId);
-            Routines = new ObservableCollection<Routine>(routinesList);
+        await dbService.InsertAsync(routine);
 
-            // Add any additional initialization logic here, e.g., calculating Ranks
-            // if (routinesList.Any())
-            // {
-            //     // Implement logic to set up Routines collection properly
-            // }
-        }
+        ObservableRoutines.Add(routine);
+    }
 
-        [RelayCommand]
-        private async Task AddRoutineAsync()
+    [RelayCommand]
+    public void Reorder()
+    {
+        // Implement the logic for reordering routines
+    }
+
+    public int Rank
+    {
+        get => rank;
+        set
         {
-            Routine routine = new()
-            {
-                Rank = Routines.Count + 1
-            };
-
-            await dbService.InsertAsync(routine);
-
-            Routines.Add(routine);
-        }
-
-        [RelayCommand]
-        public void Reorder()
-        {
-            // Implement the logic for reordering routines
-        }
-
-        public int CurrentId
-        {
-            get => currentId;
-            set
-            {
-                SetProperty(ref currentId, value);
-                _ = InitAsync(); // Call the async initialization method
-            }
+            SetProperty(ref rank, value);
+            _ = InitAsync();
         }
     }
 }
