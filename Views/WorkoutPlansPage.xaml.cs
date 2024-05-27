@@ -2,9 +2,9 @@ using GymDay.ViewModels;
 
 namespace GymDay.Views;
 
-public partial class WorkoutPlansPage : ContentPage
+public partial class WorkoutProgramsPage : ContentPage
 {
-	public WorkoutPlansPage(WorkoutPlansViewModel vm)
+	public WorkoutProgramsPage(WorkoutProgramsViewModel vm)
 	{
 		InitializeComponent();
 		BindingContext = vm;

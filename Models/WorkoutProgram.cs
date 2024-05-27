@@ -3,9 +3,9 @@ using System.Collections.ObjectModel;
 
 namespace GymDay.Models;
 
-public class WorkoutPlan : BaseWorkoutComponent
+public class WorkoutProgram : BaseWorkoutComponent
 {
     //Relationships
     [OneToMany(CascadeOperations = CascadeOperation.All)]
-    public ObservableCollection<Routine> Routines { get; set; }
+    public ObservableCollection<Workout> Workouts { get; set; }
 }

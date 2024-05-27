@@ -4,8 +4,8 @@
              xmlns:xct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewModels="clr-namespace:GymDay.ViewModels"
              xmlns:Models="clr-namespace:GymDay.Models"
-             x:Class="GymDay.Views.WorkoutPlansPage"
-             x:DataType="viewModels:WorkoutPlansViewModel"
+             x:Class="GymDay.Views.WorkoutProgramsPage"
+             x:DataType="viewModels:WorkoutProgramsViewModel"
              Title="{Binding Title}">
 
     <Shell.TitleView>
@@ -35,7 +35,7 @@
         <CollectionView.Behaviors>
 
             <xct:EventToCommandBehavior
-                x:DataType="viewModels:WorkoutPlansViewModel"
+                x:DataType="viewModels:WorkoutProgramsViewModel"
                 EventName="ReorderCompleted"
                 Command="{Binding ReorderCommand}"/>
 
@@ -46,7 +46,7 @@
             <Label
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
-                Text="{Binding Source={RelativeSource AncestorType={x:Type viewModels:WorkoutPlansViewModel}}, Path=EmptyCollectionMessage}" />
+                Text="{Binding Source={RelativeSource AncestorType={x:Type viewModels:WorkoutProgramsViewModel}}, Path=EmptyCollectionMessage}" />
 
         </CollectionView.EmptyView>
 
@@ -61,7 +61,7 @@
         <CollectionView.ItemTemplate>
 
             <DataTemplate
-                x:DataType="Models:WorkoutPlan">
+                x:DataType="Models:WorkoutProgram">
 
                 <SwipeView>
 
@@ -72,14 +72,14 @@
                             <SwipeItem 
                             Text="Delete"
                             BackgroundColor="Coral"
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:WorkoutPlansViewModel}}, Path=ShowDeleteWarningCommand}"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:WorkoutProgramsViewModel}}, Path=ShowDeleteWarningCommand}"
                             CommandParameter="{Binding .}" 
                             />
                             
                             <SwipeItem 
                             Text="Edit"
                             BackgroundColor="LightYellow"
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:WorkoutPlansViewModel}}, Path=EditCommand}"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:WorkoutProgramsViewModel}}, Path=EditCommand}"
                             CommandParameter="{Binding .}" 
                             />
 
@@ -88,7 +88,7 @@
                     </SwipeView.LeftItems>
 
                     <Frame 
-                        x:DataType="Models:WorkoutPlan"
+                        x:DataType="Models:WorkoutProgram"
                         HasShadow="True"
                         BorderColor="DarkGray"
                         Margin="5,2.5,5,2.5"
@@ -100,7 +100,7 @@
                             
                             <TapGestureRecognizer
                                 NumberOfTapsRequired="2"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:WorkoutPlansViewModel}}, Path=NavigateToRoutinesCommand}"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:WorkoutProgramsViewModel}}, Path=NavigateToRoutinesCommand}"
                                 CommandParameter="{Binding .}"/>
                             
                         </Frame.GestureRecognizers>

@@ -5,12 +5,14 @@
            x:Class="GymDay.Views.Popups.ReturnNameDialoguePage"
            HorizontalOptions="Fill"
            >
-    <Grid
+
+        <Grid
         HorizontalOptions="FillAndExpand"
         VerticalOptions="CenterAndExpand"
+        BackgroundColor="White"
         Margin="5"
         Padding="5">
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -48,6 +50,6 @@
             Clicked="Cancel_Button_Clicked" 
             />
 
-    </Grid>
+        </Grid>
 
 </mct:Popup>

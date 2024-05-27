@@ -26,13 +26,13 @@ public static class MauiProgram
         //Views
         builder.Services.AddTransient<WelcomePage>();
         builder.Services.AddTransient<CurrentWorkoutPage>();
-        builder.Services.AddTransient<WorkoutPlansPage>();
+        builder.Services.AddTransient<WorkoutProgramsPage>();
         builder.Services.AddTransient<EditRoutinesPage>();
 
         //ViewModels
         builder.Services.AddTransient<WelcomeViewModel>();
         builder.Services.AddTransient<CurrentWorkoutViewModel>();
-        builder.Services.AddTransient<WorkoutPlansViewModel>();
+        builder.Services.AddTransient<WorkoutProgramsViewModel>();
         builder.Services.AddTransient<EditRoutinesViewModel>();
 
 #if DEBUG

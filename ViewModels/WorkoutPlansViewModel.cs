@@ -9,15 +9,15 @@ using System.Collections.ObjectModel;
 
 namespace GymDay.ViewModels
 {
-    public partial class WorkoutPlansViewModel : BaseViewModel
+    public partial class WorkoutProgramsViewModel : BaseViewModel
     {
         private IDatabaseService dbService;
 
-        [ObservableProperty] ObservableCollection<WorkoutPlan> programs;
+        [ObservableProperty] ObservableCollection<WorkoutProgram> programs;
         [ObservableProperty] string emptyCollectionMessage = "No Workouts Created";
         [ObservableProperty] int cornerRadius;
 
-        public WorkoutPlansViewModel(IDatabaseService dbService)
+        public WorkoutProgramsViewModel(IDatabaseService dbService)
         {
             this.Title = "Manage Programs";
             this.dbService = dbService;
@@ -29,7 +29,7 @@ namespace GymDay.ViewModels
 
         private async void Init()
         {
-            List<WorkoutPlan> collection = await dbService.GetAllAsync<WorkoutPlan>();
+            List<WorkoutProgram> collection = await dbService.GetAllAsync<WorkoutProgram>();
 
             if (collection.Count > 0)
             {
@@ -49,7 +49,7 @@ namespace GymDay.ViewModels
         }
 
         [RelayCommand]
-        private async Task NavigateToRoutines(WorkoutPlan workoutProgram)
+        private async Task NavigateToRoutines(WorkoutProgram workoutProgram)
         {
             await Shell.Current.GoToAsync($"{nameof(EditRoutinesPage)}?rank={workoutProgram.Id}");
         }
@@ -62,7 +62,7 @@ namespace GymDay.ViewModels
             if (name == null || name == string.Empty)
                 return;
 
-            WorkoutPlan workoutProgram = new()
+            WorkoutProgram workoutProgram = new()
             {
                 Name = name,
                 TimeCreated = DateTime.Now,
@@ -72,11 +72,11 @@ namespace GymDay.ViewModels
             workoutProgram.Rank = Programs.IndexOf(workoutProgram);
 
             await dbService.InsertAsync(workoutProgram);
-            Programs = new(await dbService.GetAllAsync<WorkoutPlan>());
+            Programs = new(await dbService.GetAllAsync<WorkoutProgram>());
         }
 
         [RelayCommand]
-        public async Task ShowDeleteWarning(WorkoutPlan workoutProgram)
+        public async Task ShowDeleteWarning(WorkoutProgram workoutProgram)
         {
             DeleteDialoguePage popup = new()
             {
@@ -93,7 +93,7 @@ namespace GymDay.ViewModels
         }
 
         [RelayCommand]
-        public async Task Edit(WorkoutPlan plan)
+        public async Task Edit(WorkoutProgram plan)
         {
             string name = await ShowPopupDialogSetName();
 

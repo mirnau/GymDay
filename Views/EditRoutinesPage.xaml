@@ -59,7 +59,7 @@
         <CollectionView.ItemTemplate>
 
             <DataTemplate
-                x:DataType="models:Routine"
+                x:DataType="models:Workout"
                 >
 
                 <SwipeView>
@@ -76,7 +76,7 @@
                     </SwipeView.LeftItems>
 
                     <Frame 
-                        x:DataType="models:Routine"
+                        x:DataType="models:Workout"
                         HasShadow="True"
                         BorderColor="DarkGray"
                         Margin="5,2.5,5,2.5"
@@ -86,11 +86,11 @@
                         >
                         <StackLayout>
                             <CollectionView
-                            x:DataType="models:Routine"
+                            x:DataType="models:Workout"
                             BackgroundColor="Bisque"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="StartAndExpand"
-                            ItemsSource="{Binding Workouts}"
+                            ItemsSource="{Binding Exercises}"
                             CanReorderItems="True">
 
                                 <CollectionView.Behaviors>
@@ -146,7 +146,7 @@
                                             </SwipeView.LeftItems>
 
                                             <Frame 
-                                            x:DataType="models:Routine"
+                                            x:DataType="models:Workout"
                                             HasShadow="True"
                                             BorderColor="DarkGray"
                                             Margin="5,2.5,5,2.5"

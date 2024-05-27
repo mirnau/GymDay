@@ -2,9 +2,9 @@
 
 namespace GymDay.Models;
 
-public class Workout : BaseWorkoutComponent
+public class Workout : BaseWorkoutComponent, IModelWithParentId
 {
-    [ForeignKey(typeof(Routine))]
+    [ForeignKey(typeof(WorkoutProgram))]
     public int ParentId { get; set; }
 
     //Relationships

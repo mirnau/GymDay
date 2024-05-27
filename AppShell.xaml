@@ -13,8 +13,8 @@
     
     <ShellContent
         Title="Your Programs"
-        ContentTemplate="{DataTemplate views:WorkoutPlansPage}"
-        Route="WorkoutPlansPage" />
+        ContentTemplate="{DataTemplate views:WorkoutProgramsPage}"
+        Route="WorkoutProgramsPage" />
 
     <ShellContent
         Title="Current Workout"

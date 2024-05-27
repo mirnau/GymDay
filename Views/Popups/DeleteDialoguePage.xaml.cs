@@ -3,10 +3,10 @@ namespace GymDay.Views.Popups;
 
 public partial class DeleteDialoguePage : Popup
 {
-	public DeleteDialoguePage()
-	{
-		InitializeComponent();
-	}
+    public DeleteDialoguePage()
+    {
+        InitializeComponent();
+    }
 
     public void Yes_Button_Clicked(object sender, EventArgs e) => Close(true);
 

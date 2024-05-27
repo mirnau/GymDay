@@ -10,10 +10,10 @@ namespace GymDay.ViewModels;
 public partial class EditRoutinesViewModel : BaseViewModel
 {
     [ObservableProperty]
-    private WorkoutPlan workoutProgram;
+    private WorkoutProgram workoutProgram;
 
     [ObservableProperty]
-    private ObservableCollection<Routine> observableRoutines;
+    private ObservableCollection<Workout> observableRoutines;
 
     private int rank;
     private readonly IDatabaseService dbService;
@@ -26,11 +26,11 @@ public partial class EditRoutinesViewModel : BaseViewModel
 
     private async Task InitAsync()
     {
-        WorkoutProgram = await dbService.GetAsync<WorkoutPlan>(Rank);
+        WorkoutProgram = await dbService.GetAsync<WorkoutProgram>(Rank);
         WorkoutProgram.LastView = DateTime.Now;
 
-        List<Routine> routinesList = await dbService.GetAllByParentId<Routine>(WorkoutProgram.Id);
-        ObservableRoutines = new ObservableCollection<Routine>(routinesList);
+        List<Workout> routinesList = await dbService.GetAllByParentId<Workout>(WorkoutProgram.Id);
+        ObservableRoutines = new ObservableCollection<Workout>(routinesList);
 
         if (ObservableRoutines.Any())
         {
@@ -41,7 +41,7 @@ public partial class EditRoutinesViewModel : BaseViewModel
     [RelayCommand]
     private async Task AddRoutineAsync()
     {
-        Routine routine = new()
+        Workout workout = new()
         {
             TimeCreated = DateTime.Now,
             LastView = DateTime.Now,
@@ -49,9 +49,9 @@ public partial class EditRoutinesViewModel : BaseViewModel
             Rank = ObservableRoutines.Count + 1
         };
 
-        await dbService.InsertAsync(routine);
+        await dbService.InsertAsync(workout);
 
-        ObservableRoutines.Add(routine);
+        ObservableRoutines.Add(workout);
     }
 
     [RelayCommand]

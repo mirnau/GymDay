@@ -33,11 +33,10 @@ public class SqLiteService : IDatabaseService
             return;
 
         await db.ExecuteAsync(foreignKeys);
-        await db.CreateTableAsync<Routine>();
         await db.CreateTableAsync<Workout>();
         await db.CreateTableAsync<Exercise>();
         await db.CreateTableAsync<Set>();
-        await db.CreateTableAsync<WorkoutPlan>();
+        await db.CreateTableAsync<WorkoutProgram>();
 
         hasInstantiatedTables = true;
     }
@@ -106,13 +105,9 @@ public class SqLiteService : IDatabaseService
     {
         await Init();
 
-        await db.DeleteAllAsync<WorkoutPlan>();
-        int workoutPlans = await db.DropTableAsync<WorkoutPlan>();
+        await db.DeleteAllAsync<WorkoutProgram>();
+        int workoutPlans = await db.DropTableAsync<WorkoutProgram>();
         if (workoutPlans > 0) { return false; }
-
-        await db.DeleteAllAsync<Routine>();
-        int routines = await db.DropTableAsync<Routine>();
-        if (routines > 0) { return false; }
 
         await db.DeleteAllAsync<Workout>();
         int workouts = await db.DropTableAsync<Workout>();
